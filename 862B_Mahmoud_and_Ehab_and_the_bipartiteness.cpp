@@ -2,11 +2,11 @@
 using namespace std;
 #define int long long
 #define fastio() ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-void dfs(vector<vector<int>>&adj,vector<int>&col,int nd,int par){
-   for(auto num:adj[nd]){
-    if(num==par)continue;
-      col[num]=col[nd]^1;
-      dfs(adj,col,num,nd);
+void dfs(vector<vector<int>>&adj,vector<int>&col,int par){
+   for(auto num:adj[par]){
+    if(col[num]!=-1 )continue;
+      col[num]=col[par]^1;
+      dfs(adj,col,num);
    }
 }
 int32_t main() 
@@ -23,7 +23,7 @@ int32_t main()
             adj[y].push_back(x);
       }
  
-    dfs(adj,col,1,-1);
+    dfs(adj,col,1);
      
       int z=0;int o=0;
       for(auto num:col){
